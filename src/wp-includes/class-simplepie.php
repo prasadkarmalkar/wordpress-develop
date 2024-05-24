@@ -710,7 +710,7 @@ class SimplePie
 	{
 		if (version_compare(PHP_VERSION, '5.6', '<'))
 		{
-			trigger_error('Please upgrade to PHP 5.6 or newer.');
+			wp_trigger_error(__METHOD__, 'Please upgrade to PHP 5.6 or newer.');
 			die();
 		}
 
@@ -721,7 +721,7 @@ class SimplePie
 		if (func_num_args() > 0)
 		{
 			$level = defined('E_USER_DEPRECATED') ? E_USER_DEPRECATED : E_USER_WARNING;
-			trigger_error('Passing parameters to the constructor is no longer supported. Please use set_feed_url(), set_cache_location(), and set_cache_duration() directly.', $level);
+			wp_trigger_error(__METHOD__, 'Passing parameters to the constructor is no longer supported. Please use set_feed_url(), set_cache_location(), and set_cache_duration() directly.', $level);
 
 			$args = func_get_args();
 			switch (count($args)) {
@@ -1562,7 +1562,7 @@ class SimplePie
 					// Cache the file if caching is enabled
 					if ($cache && !$cache->save($this))
 					{
-						trigger_error("$this->cache_location is not writable. Make sure you've set the correct relative or absolute path, and that the location is server-writable.", E_USER_WARNING);
+						wp_trigger_error(__METHOD__, "$this->cache_location is not writable. Make sure you've set the correct relative or absolute path, and that the location is server-writable.", E_USER_WARNING);
 					}
 					return true;
 				}
@@ -1802,7 +1802,7 @@ class SimplePie
 					$this->data = array('url' => $this->feed_url, 'feed_url' => $file->url, 'build' => SIMPLEPIE_BUILD);
 					if (!$cache->save($this))
 					{
-						trigger_error("$this->cache_location is not writable. Make sure you've set the correct relative or absolute path, and that the location is server-writable.", E_USER_WARNING);
+						wp_trigger_error(__METHOD__, "$this->cache_location is not writable. Make sure you've set the correct relative or absolute path, and that the location is server-writable.", E_USER_WARNING);
 					}
 					$cache = $this->registry->call('Cache', 'get_handler', array($this->cache_location, call_user_func($this->cache_name_function, $file->url), 'spc'));
 				}
@@ -3194,7 +3194,7 @@ class SimplePie
 	public function set_favicon_handler($page = false, $qs = 'i')
 	{
 		$level = defined('E_USER_DEPRECATED') ? E_USER_DEPRECATED : E_USER_WARNING;
-		trigger_error('Favicon handling has been removed, please use your own handling', $level);
+		wp_trigger_error(__METHOD__, 'Favicon handling has been removed, please use your own handling', $level);
 		return false;
 	}
 
@@ -3206,7 +3206,7 @@ class SimplePie
 	public function get_favicon()
 	{
 		$level = defined('E_USER_DEPRECATED') ? E_USER_DEPRECATED : E_USER_WARNING;
-		trigger_error('Favicon handling has been removed, please use your own handling', $level);
+		wp_trigger_error(__METHOD__, 'Favicon handling has been removed, please use your own handling', $level);
 
 		if (($url = $this->get_link()) !== null)
 		{
@@ -3228,13 +3228,13 @@ class SimplePie
 		if (strpos($method, 'subscribe_') === 0)
 		{
 			$level = defined('E_USER_DEPRECATED') ? E_USER_DEPRECATED : E_USER_WARNING;
-			trigger_error('subscribe_*() has been deprecated, implement the callback yourself', $level);
+			wp_trigger_error(__METHOD__, 'subscribe_*() has been deprecated, implement the callback yourself', $level);
 			return '';
 		}
 		if ($method === 'enable_xml_dump')
 		{
 			$level = defined('E_USER_DEPRECATED') ? E_USER_DEPRECATED : E_USER_WARNING;
-			trigger_error('enable_xml_dump() has been deprecated, use get_raw_data() instead', $level);
+			wp_trigger_error(__METHOD__, 'enable_xml_dump() has been deprecated, use get_raw_data() instead', $level);
 			return false;
 		}
 
@@ -3242,7 +3242,7 @@ class SimplePie
 		$trace = debug_backtrace(); // phpcs:ignore PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection
 		$file = $trace[0]['file'];
 		$line = $trace[0]['line'];
-		trigger_error("Call to undefined method $class::$method() in $file on line $line", E_USER_ERROR);
+		wp_trigger_error(__METHOD__, "Call to undefined method $class::$method() in $file on line $line", E_USER_ERROR);
 	}
 
 	/**
@@ -3296,7 +3296,7 @@ class SimplePie
 				}
 				else
 				{
-					trigger_error('Arguments must be SimplePie objects', E_USER_WARNING);
+					wp_trigger_error(__METHOD__, 'Arguments must be SimplePie objects', E_USER_WARNING);
 				}
 			}
 
@@ -3310,7 +3310,7 @@ class SimplePie
 			return array_slice($items, $start, $end);
 		}
 
-		trigger_error('Cannot merge zero SimplePie objects', E_USER_WARNING);
+		wp_trigger_error(__METHOD__, 'Cannot merge zero SimplePie objects', E_USER_WARNING);
 		return array();
 	}
 

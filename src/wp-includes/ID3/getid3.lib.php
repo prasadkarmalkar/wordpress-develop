@@ -447,7 +447,7 @@ class getid3_lib
 	public static function Dec2Bin($number) {
 		if (!is_numeric($number)) {
 			// https://github.com/JamesHeinrich/getID3/issues/299
-			trigger_error('TypeError: Dec2Bin(): Argument #1 ($number) must be numeric, '.gettype($number).' given', E_USER_WARNING);
+			wp_trigger_error(__METHOD__, 'TypeError: Dec2Bin(): Argument #1 ($number) must be numeric, '.gettype($number).' given', E_USER_WARNING);
 			return '';
 		}
 		$bytes = array();

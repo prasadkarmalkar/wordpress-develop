@@ -148,7 +148,7 @@ class AtomParser {
         array_unshift($this->ns_contexts, array());
 
         if ( ! function_exists( 'xml_parser_create_ns' ) ) {
-        	trigger_error( __( "PHP's XML extension is not available. Please contact your hosting provider to enable PHP's XML extension." ) );
+        	wp_trigger_error( __METHOD__, __( "PHP's XML extension is not available. Please contact your hosting provider to enable PHP's XML extension." ) );
         	return false;
         }
 
@@ -172,7 +172,7 @@ class AtomParser {
 
             if(!xml_parse($parser, $data, feof($fp))) {
                 /* translators: 1: Error message, 2: Line number. */
-                trigger_error(sprintf(__('XML Error: %1$s at line %2$s')."\n",
+                wp_trigger_error(__METHOD__, sprintf(__('XML Error: %1$s at line %2$s')."\n",
                     xml_error_string(xml_get_error_code($parser)),
                     xml_get_current_line_number($parser)));
                 $ret = false;
@@ -216,7 +216,7 @@ class AtomParser {
             $this->content_ns_decls = array();
 
             if($this->is_html || $this->is_text)
-                trigger_error("Invalid content in element found. Content must not be of type text or html if it contains markup.");
+            wp_trigger_error(__METHOD__, "Invalid content in element found. Content must not be of type text or html if it contains markup.");
 
             $attrs_prefix = array();
 

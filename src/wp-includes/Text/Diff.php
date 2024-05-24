@@ -260,24 +260,24 @@ class Text_Diff {
     function _check($from_lines, $to_lines)
     {
         if (serialize($from_lines) != serialize($this->getOriginal())) {
-            trigger_error("Reconstructed original does not match", E_USER_ERROR);
+            wp_trigger_error(__METHOD__, "Reconstructed original does not match", E_USER_ERROR);
         }
         if (serialize($to_lines) != serialize($this->getFinal())) {
-            trigger_error("Reconstructed final does not match", E_USER_ERROR);
+            wp_trigger_error(__METHOD__, "Reconstructed final does not match", E_USER_ERROR);
         }
 
         $rev = $this->reverse();
         if (serialize($to_lines) != serialize($rev->getOriginal())) {
-            trigger_error("Reversed original does not match", E_USER_ERROR);
+            wp_trigger_error(__METHOD__, "Reversed original does not match", E_USER_ERROR);
         }
         if (serialize($from_lines) != serialize($rev->getFinal())) {
-            trigger_error("Reversed final does not match", E_USER_ERROR);
+            wp_trigger_error(__METHOD__, "Reversed final does not match", E_USER_ERROR);
         }
 
         $prevtype = null;
         foreach ($this->_edits as $edit) {
             if ($edit instanceof $prevtype) {
-                trigger_error("Edit sequence is non-optimal", E_USER_ERROR);
+                wp_trigger_error(__METHOD__, "Edit sequence is non-optimal", E_USER_ERROR);
             }
             $prevtype = get_class($edit);
         }
@@ -357,7 +357,7 @@ class Text_Diff_Op {
 
     function &reverse()
     {
-        trigger_error('Abstract method', E_USER_ERROR);
+        wp_trigger_error(__METHOD__, 'Abstract method', E_USER_ERROR);
     }
 
     function norig()

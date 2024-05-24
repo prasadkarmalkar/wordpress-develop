@@ -203,7 +203,7 @@ class SimplePie_IRI
 		}
 		else
 		{
-			trigger_error('Undefined property: ' . get_class($this) . '::' . $name, E_USER_NOTICE);
+			wp_trigger_error(__METHOD__, 'Undefined property: ' . get_class($this) . '::' . $name, E_USER_NOTICE);
 			$return = null;
 		}
 

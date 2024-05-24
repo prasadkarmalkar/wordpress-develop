@@ -242,7 +242,7 @@ class SimplePie_Item
 		}
 		elseif (!is_callable($fn))
 		{
-			trigger_error('User-supplied function $fn must be callable', E_USER_WARNING);
+			wp_trigger_error(__METHOD__, 'User-supplied function $fn must be callable', E_USER_WARNING);
 			$fn = 'md5';
 		}
 		return call_user_func($fn,

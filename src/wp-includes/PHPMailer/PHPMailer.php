@@ -1562,7 +1562,7 @@ class PHPMailer
             && ini_get('mail.add_x_header') === '1'
             && stripos(PHP_OS, 'WIN') === 0
         ) {
-            trigger_error($this->lang('buggy_php'), E_USER_WARNING);
+            wp_trigger_error(__METHOD__, $this->lang('buggy_php'), E_USER_WARNING);
         }
 
         try {

@@ -179,7 +179,7 @@ class SimplePie_gzdecode
 	 */
 	public function __set($name, $value)
 	{
-		trigger_error("Cannot write property $name", E_USER_ERROR);
+		wp_trigger_error(__METHOD__, "Cannot write property $name", E_USER_ERROR);
 	}
 
 	/**

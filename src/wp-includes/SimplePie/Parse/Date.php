@@ -676,7 +676,7 @@ class SimplePie_Parse_Date
 		}
 		else
 		{
-			trigger_error('User-supplied function must be a valid callback', E_USER_WARNING);
+			wp_trigger_error(__METHOD__, 'User-supplied function must be a valid callback', E_USER_WARNING);
 		}
 	}
 
